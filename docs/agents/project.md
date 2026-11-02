@@ -12,7 +12,7 @@
 | --- | --- |
 | `src/index.ts`, `src/HelloWorld.tsx` | 라이브러리 공개 진입점과 예제 컴포넌트 |
 | `examples/src/` | React, React Router 기반 데모. `Home`에서 루트의 `src`를 직접 가져옴 |
-| `examples/package.json`, `examples/webpack.config.js` | 별도 의존성과 Webpack 개발 서버·프로덕션 번들 설정 |
+| `examples/package.json`, `examples/rspack.config.js` | 별도 의존성과 Rspack 개발 서버·프로덕션 번들 설정 |
 | `package.json`, `rollup.config.js` | 공개 진입점, peer dependency, 배포 파일 및 Rollup 빌드 |
 | `tsconfig.json`, `examples/tsconfig.json` | 각각 라이브러리와 예제 타입 검사. 예제 검사는 루트 `src/`도 포함 |
 | `jest.config.ts`, `tsconfig.test.json` | Jest와 ts-jest 설정. 현재 테스트 스크립트와 테스트 파일은 없음 |
@@ -24,7 +24,7 @@
 
 `src/index.ts`를 Rollup이 CommonJS 코드 `dist/index.js`, ES 모듈 `dist/index.esm.js`, 타입 선언 `dist/index.d.ts`로 출력한다. 패키지의 `main`·`module`·`types` 및 `exports`가 이 경로를 가리킨다. Rollup은 `dependencies`와 `peerDependencies`를 외부 처리한다. React와 React DOM은 `>=19.0.0` peer dependency이며 예제는 두 패키지를 별도로 선언한다.
 
-Rollup은 빌드 시작 시 `dist/*`를 정리하며 `.private` 디렉터리와 `.private.d.ts` 파일을 선언 결과에서 제거한다. 공개 선언이 삭제된 타입을 참조하지 않는지 확인한다. 라이브러리와 예제 모두 TypeScript의 `moduleResolution: bundler`를 사용한다. 예제의 `@comp` 경로는 예제 TypeScript 및 Webpack 설정에서 해석한다.
+Rollup은 빌드 시작 시 `dist/*`를 정리하며 `.private` 디렉터리와 `.private.d.ts` 파일을 선언 결과에서 제거한다. 공개 선언이 삭제된 타입을 참조하지 않는지 확인한다. 라이브러리와 예제 모두 TypeScript의 `moduleResolution: bundler`를 사용한다. 예제의 `@comp` 경로는 예제 TypeScript 및 Rspack 설정에서 해석한다.
 
 루트 Babel은 Rollup 플러그인의 peer 범위 때문에 7.x를 사용한다. ESLint는 `@rollup/plugin-eslint`, `eslint-plugin-react` 및 예제의 `eslint-plugin-jsx-a11y` peer 범위에 맞춰 9.x이고, TypeScript는 `typescript-eslint`와 `ts-jest` 범위에 맞춰 6.x다. 의존성을 변경할 때 현재 peer 범위를 다시 확인한다.
 
@@ -38,9 +38,9 @@ Rollup은 빌드 시작 시 `dist/*`를 정리하며 `.private` 디렉터리와 
 | 라이브러리 lint | `npm run lint` | `src/**/*.{ts,tsx}` 대상 |
 | 라이브러리 빌드 | `npm run build` | Watchman 재등록 후 Rollup 실행. 테스트는 실행하지 않음 |
 | Rollup만 실행 | `./node_modules/.bin/rollup -c --bundleConfigAsCjs` | `dist/*` 정리 후 생성. 표준 빌드 전체의 통과를 뜻하지 않음 |
-| 예제 개발 서버 | `npm run dev` | Webpack 개발 서버, 기본 포트 9800 |
+| 예제 개발 서버 | `npm run dev` | Rspack 개발 서버, 기본 포트 9800 |
 | 예제 검사 | `cd examples && npm run tsc && npm run lint` | 타입 검사는 루트 소스도 포함 |
-| 예제 번들 확인 | `cd examples && npm run build:webpack` | Webpack 프로덕션 빌드 |
+| 예제 번들 확인 | `cd examples && npm run build:rspack` | Rspack 프로덕션 빌드 |
 | 예제 전체 빌드 | `npm run build:examples` | 예제 결과를 정리·생성하고 루트 `index.html`, `404.html`에 복사 |
 | 배포 파일 확인 | `npm pack --dry-run` | 실제 게시하지 않음 |
 

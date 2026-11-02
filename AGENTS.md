@@ -2,7 +2,7 @@
 
 ## 프로젝트
 
-React 컴포넌트를 TypeScript npm 패키지로 만드는 템플릿이다. `src/index.ts`는 `HelloWorld` 이름 있는 컴포넌트를 내보내며 `examples/`는 라이브러리 소스를 직접 가져오는 별도 Webpack React 애플리케이션이다.
+React 컴포넌트를 TypeScript npm 패키지로 만드는 템플릿이다. `src/index.ts`는 `HelloWorld` 이름 있는 컴포넌트를 내보내며 `examples/`는 라이브러리 소스를 직접 가져오는 별도 Rspack React 애플리케이션이다.
 
 - 구현과 공개 API: `src/`, `src/index.ts`
 - 예제: `examples/src/`, `examples/package.json`
@@ -32,6 +32,6 @@ cd examples && npm run tsc && npm run lint
 
 현재 테스트 파일과 npm `test` 스크립트가 없다. 동작 변경 시 적절한 테스트를 추가하고 실제 실행 가능한 검증 명령을 마련한다. Jest 설정은 있으나 현재 변환 패턴은 `.tsx`를 포함하지 않으며 테스트 환경은 Node다. React 컴포넌트 테스트에서는 필요한 환경과 변환 설정을 확인한다.
 
-라이브러리 빌드 변경 시 `npm run build`를 실행한다. 이 명령은 Watchman 감시 재등록 후 Rollup을 실행하며 테스트는 실행하지 않는다. Watchman이 없거나 접근 오류가 있으면 `./node_modules/.bin/rollup -c --bundleConfigAsCjs`로 번들을 별도 확인하고 표준 빌드 전체가 통과했다고 보고하지 않는다. 예제 변경 시 `cd examples && npm run build:webpack`으로 번들을 확인한다. 예제의 `npm run build`는 추가로 루트의 `index.html`과 `404.html`을 덮어쓴다.
+라이브러리 빌드 변경 시 `npm run build`를 실행한다. 이 명령은 Watchman 감시 재등록 후 Rollup을 실행하며 테스트는 실행하지 않는다. Watchman이 없거나 접근 오류가 있으면 `./node_modules/.bin/rollup -c --bundleConfigAsCjs`로 번들을 별도 확인하고 표준 빌드 전체가 통과했다고 보고하지 않는다. 예제 변경 시 `cd examples && npm run build:rspack`으로 번들을 확인한다. 예제의 `npm run build`는 추가로 루트의 `index.html`과 `404.html`을 덮어쓴다.
 
 문서만 수정할 때는 링크·경로·명령이 실제 설정과 일치하는지 확인한다. 완료 보고에는 변경 내용, 실행한 검증과 결과, 미확인 사항을 남긴다.
