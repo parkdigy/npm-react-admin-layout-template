@@ -65,6 +65,8 @@
   },
   "allowScripts": {
     "esbuild": true,
-    "fsevents": true
+    "fsevents": true,
+    "core-js": true,
+    "@parcel/watcher": true
   }
 }
